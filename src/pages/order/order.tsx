@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { message, orderAtom } from './orderAtom'
+import { message, orderAtom, orderHeader } from './orderAtom'
 import { noodlesType } from './orderAtom'
 import { doc, addDoc, collection } from 'firebase/firestore'
 import { onAuthStateChanged } from 'firebase/auth'
@@ -18,6 +18,7 @@ const ClickOrder = ({ name }: any) => {
   const [messageState, setMessage] = useRecoilState(message)
   const orderState = useRecoilValue(orderAtom)
   const [Loading, setLoading] = useState<boolean>(false)
+  const orderHeaderState = useRecoilValue(orderHeader)
 
   const handleClick = async () => {
     await setLoading(true)
@@ -35,6 +36,7 @@ const ClickOrder = ({ name }: any) => {
       Status: true,
       Username: auth.currentUser?.displayName,
       UID: auth.currentUser?.uid,
+      Order_Name: orderHeaderState,
     } as orderType)
 
     await setLoading(false)

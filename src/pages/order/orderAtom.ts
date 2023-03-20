@@ -27,3 +27,8 @@ export const message = atom({
   key: 'message',
   default: '',
 })
+
+export const orderHeader = atom({
+  key: 'orderHeader',
+  default: '',
+})

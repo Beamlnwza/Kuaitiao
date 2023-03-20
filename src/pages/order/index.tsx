@@ -5,12 +5,14 @@ import { noodlesSize, noodlesType } from './orderAtom'
 import ClickOrder from './order'
 import { useRecoilState } from 'recoil'
 import { message } from './orderAtom'
+import { orderHeader } from './orderAtom'
 
 const Order = () => {
   const { id } = useParams<{ id: string }>()
   const [name, setName] = useState<string | null>(null)
   const [surname, setSurname] = useState<string | null>(null)
   const [messageState, setmessageState] = useRecoilState(message)
+  const [orderHeaer, setOrderHeader] = useRecoilState(orderHeader)
 
   useEffect(() => {
     checkifavilabke()
@@ -21,6 +23,7 @@ const Order = () => {
         //if id not in list, redirect to 404 page
         if (!list.includes(id)) {
           window.location.href = '/404'
+          return
         }
       }
     }

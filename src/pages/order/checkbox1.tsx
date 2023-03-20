@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { noodlesType, noodlesSize, orderAtom, OrderType } from './orderAtom'
 import { useRecoilState } from 'recoil'
-
+import { orderHeader } from './orderAtom'
 export interface checkboxProps {
   name: string | undefined
 }
@@ -12,6 +12,7 @@ const Checkbox1 = ({ name }: checkboxProps): JSX.Element => {
     Array(5).fill(false)
   )
   const [CheckBoxTrue2, setCheckBoxTrue2] = useState<boolean[]>([true, false])
+  const [orderHeaderState, setOrderHeaderState] = useRecoilState(orderHeader)
 
   let noodleType: noodlesType[] = [
     'namsai',
@@ -27,7 +28,7 @@ const Checkbox1 = ({ name }: checkboxProps): JSX.Element => {
     'น้ำใส',
     'น้ำตก',
     'ต้มยำ',
-    'เย็นตาโฟล',
+    'เย็นตาโฟ',
     'หมาล่า',
     'แห้ง',
   ]
@@ -78,6 +79,10 @@ const Checkbox1 = ({ name }: checkboxProps): JSX.Element => {
       })
     }
   }, [CheckboxTrue, CheckBoxTrue2])
+
+  useEffect(() => {
+    setOrderHeaderState(noodleName)
+  }, [noodleName])
 
   /* useEffect(() => {
     return () => {}

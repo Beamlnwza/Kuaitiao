@@ -53,6 +53,7 @@ const ListOrder = () => {
     item: DocumentData[string]
   ) => {
     await e.preventDefault()
+    let data = item
     await setDoc(doc(db, 'ORDER', item), {
       Status: false,
     } as orderType)
@@ -80,10 +81,40 @@ const ListOrder = () => {
     )
   }
 
+  const noodleDict = {
+    A: 'เส้นเล็ก',
+    B: 'หมี่เหลือง',
+    C: 'วุ้นเส้น',
+    D: 'มาม่า',
+    E: 'เส้นใหญ่',
+    F: 'หมี่ขาว',
+  }
+
+  const renderProductHeader = (
+    Product_ID: string,
+    Order_Header: string
+  ): ReactNode => {
+    // @ts-ignore
+    let product = noodleDict[Product_ID[0]]
+
+    return <div>{product + ' ' + Order_Header + ' ' + Product_ID}</div>
+  }
+
   return (
     <div className="">
-      <div className="flex h-16 w-screen items-center justify-end px-4">
-        <button className="border border-black" onClick={SignOutHandle}>
+      <div className="flex h-16 w-screen items-center justify-end gap-2 px-5">
+        <button
+          className="rounded-lg bg-yellow-500 p-2"
+          onClick={() => {
+            window.location.href = '/'
+          }}
+        >
+          กลับไปที่หน้าหลัก
+        </button>
+        <button
+          className="rounded-lg bg-red-600 p-2 text-white"
+          onClick={SignOutHandle}
+        >
           ออกจากระบบ
         </button>
       </div>
@@ -98,7 +129,7 @@ const ListOrder = () => {
             className="my-4 grid grid-cols-4 border border-x-0 border-t-0 border-b-gray-500 text-lg"
           >
             <div className="col-start-1 flex justify-center">
-              {item.Product_ID}
+              {renderProductHeader(item.Product_ID, item.Order_Name)}
             </div>
             <div className="col-start-2 flex justify-center">
               {renderDate(item.Order_Date)}

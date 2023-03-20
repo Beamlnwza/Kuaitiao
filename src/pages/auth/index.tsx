@@ -57,13 +57,28 @@ const Auth = () => {
             />
             <div>รหัสผ่าน</div>
             <input
-              type="text"
+              type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="rounded-md border border-gray-300 px-5 py-2 hover:shadow-md focus:shadow-md"
             />
           </div>
-          <button onClick={LoginHandle}>Login!</button>
+          <div className="flex gap-2">
+            <button
+              onClick={LoginHandle}
+              className="rounded-lg bg-yellow-400 p-2 text-lg"
+            >
+              Login!
+            </button>
+            <button
+              onClick={() => {
+                window.location.href = '/'
+              }}
+              className="rounded-lg bg-green-400 p-2 text-lg text-white"
+            >
+              กลับไปหน้าหลัก
+            </button>
+          </div>
         </div>
       </div>
     </>

@@ -28,7 +28,7 @@ const Foods = () => {
 
     //if data is null
     if (!data) {
-      return <div>No data</div>
+      return <div>เกิดข้อผิดพลาด</div>
     }
 
     //if data is work
